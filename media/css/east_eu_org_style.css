@@ -95,6 +95,8 @@ input[type=text] {
     padding: 8px 20px 8px 45px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
+    outline:none;     //针对谷歌蓝边
+    box-shadow: none; //针对火狐浏览器蓝边
 }
 
 input[type=text]:focus {
