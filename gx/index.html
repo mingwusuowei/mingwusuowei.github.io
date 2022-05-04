@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="zh" dir="ltr">
 <head>
   <meta charset="utf-8">
   <title>Screen Sharing using RTCMultiConnection</title>
@@ -9,21 +9,10 @@
   <script src="demos/menu.js"></script>
 </head>
 <body>
-  <header>
-  </header>
-
-  <h1>
-    Screen Sharing using RTCMultiConnection
-    <p class="no-mobile">
-      Multi-user (one-to-many) screen sharing using star topology.
-    </p>
-  </h1>
-
   <section class="make-center">
     <input type="text" id="room-id" value="abcdef" autocorrect=off autocapitalize=off size=20>
-    <button id="open-room">Open Room</button>
-    <button id="join-room">Join Room</button>
-    <button id="open-or-join-room">Auto Open Or Join Room</button>
+    <button id="open-room">创建房间</button>
+    <button id="join-room">加入房间</button>
 
     <div id="videos-container" style="margin: 20px 0;"></div>
 
@@ -208,7 +197,7 @@ function showRoomURL(roomid) {
     var roomHashURL = '#' + roomid;
     var roomQueryStringURL = '?roomid=' + roomid;
 
-    var html = '<h2>Unique URL for your room:</h2><br>';
+    var html = '<h2>房间唯一URL:</h2>';
 
     html += 'Hash URL: <a href="' + roomHashURL + '" target="_blank">' + roomHashURL + '</a>';
     html += '<br>';
