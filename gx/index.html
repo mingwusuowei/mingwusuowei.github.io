@@ -1,31 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
-  <title>Desktop capture</title>
-
-  <style>
-    body {
-      background: white;
-      display: -webkit-flex;
-      -webkit-justify-content: center;
-      -webkit-align-items: center;
-      -webkit-flex-direction: column;
-    }
-    video {
-      width: 640px;
-      height: 480px;
-      border: 1px solid #e2e2e2;
-    }
-  </style>
-
+	<title>WebRTC Example 05 Screen Sharing</title>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="//code.deepstreamhub.com/js/latest/deepstream.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/simple-peer/8.1.0/simplepeer.min.js"></script>
 </head>
 <body>
-  <video id="video" playsinline autoplay></video>
-  <p>
-    <button id="start">Share Screen</button>
-  </p>
-  <script src="app.js"></script>
+	<div id="wrapper" class="centered">
+		<div id="domain-warning" class="warning">
+			This example will only work on deepstreamhub.com unless you change the domain path in <a href="https://github.com/deepstreamIO/dsh-demo-webrtc-examples/blob/master/05-screen-sharing/chrome-addon/manifest.json">https://github.com/deepstreamIO/dsh-demo-webrtc-examples/blob/master/05-screen-sharing/chrome-addon/manifest.json</a>
+		</div>
+		<div id="addon-not-found" class="warning">
+			Chrome extension not found. Install it by following the steps in
+			<a href="https://deepstreamhub.com/tutorials/protocols/webrtc-screen-sharing/#install-addon">
+			https://deepstreamhub.com/tutorials/protocols/webrtc-screen-sharing/#install-addon</a>
+		</div>
+		<button id="share-my-screen" disabled>share my screen</button><br />
+		<video id="local" width="640" height="360" autoplay style="background: #000;display: inline-block;margin-top: 20px;"></video>
+	</div>
 </body>
-</html>
+</html
