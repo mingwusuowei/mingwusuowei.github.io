@@ -8,11 +8,11 @@ document.getElementById('start').addEventListener('click', function() {
   // send screen-sharer request to content-script
   if (!extensionInstalled) {
     const message = 'Please install the extension:\n' +
-        '1. Go to chrome://extensions\n' +
-        '2. Check: "Enable Developer mode"\n' +
-        '3. Click: "Load the unpacked extension..."\n' +
-        '4. Choose "extension" folder from the repository\n' +
-        '5. Reload this page';
+        '1. 去chrome://extensions\n' +
+        '2. 选中：“启用开发人员模式”\n' +
+        '3. 单击：“加载未打包的扩展…”\n' +
+        '4. 从存储库中选择“扩展”文件夹\n' +
+        '5. 重新加载此页面';
     alert(message);
   }
   window.postMessage({type: 'SS_UI_REQUEST', text: 'start'}, '*');
