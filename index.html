@@ -1,0 +1,290 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>East</title>
+<link rel="stylesheet" href="guide/css/style.css">
+    <script src="guide/js/jquery.min.js"></script>
+    <script src="guide/js/hls.min.js"></script>
+	<script type="text/javascript" src="guide/js/rc4.js"></script>
+</head>
+<style type="text/css">
+	#show-video {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		z-index: 999 !important;
+		background: rgba(0, 0, 0, .25);
+		display: none;
+	}
+
+	.video-close {
+		width: 45px;
+		height: 45px;
+		color: #211d1e;
+		position: absolute;
+		right: 118px;
+		top: 113px;
+		z-index: 999;
+		cursor: pointer;
+	}
+
+	#show-video video {
+		outline: none;
+		max-width: 85%;
+		max-height: 70vh;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		box-shadow: 0 20px 40px rgb(0 0 0 / 50%);
+	}
+</style>
+<body "return false;" onselectstart="return false">
+<!--value="(.*?)"-->
+<input type="text" id="mwtxt" value="" style="display:none"/>
+<textarea id="textarea" style="display:none;"></textarea>
+
+<div class="instructions">
+	<div class="centerBody">
+		<img src="guide/img/githublogo.png" /></br>
+		<input type="text" id="input" name="wd" placeholder="搜索 ..." onkeydown="var e=window.event || arguments[0];if(e.keyCode==13){ Decrypt() }"/>
+		</br></br></br>
+		<p class="btn-p">
+			<a href="javascript:history.go(0);" target="_parent" title="Telegram"><font color="#FFF">Telegram</font></a></br>
+			<a href="javascript:history.go(0);" target="_parent" title="E-mail"><font color="#FFF">E-mail</font></a></br>
+			<a href="https://yy.east.eu.org" target="_parent" title="Voice Chat"><font color="#FFF">Voice Chat</font></a></br>
+			<a href="https://www.913579.xyz" target="_parent" title="Blog"><font color="#FFF">Blog</font></a></br>
+		</p>
+
+	</div>
+	</br></br></br></br></br></br></br></br></br>
+	<div class="footer">
+		<div class="center-footer">
+			<p class="banquan">
+				
+				<a href="javascript:history.go(0);" target="_parent" title="East"><font color="#FFF">© Some Rights Reserved</font></a>
+				</br></br>
+				<a target="_blank" title="Powered by Cloudflare Pages" href="https://pages.github.com/"><font color="#FFF">Powered by GitHub Pages</font></a>
+				</br></br>
+					<font color="#FFF">已经运行了「<script type="text/javascript">
+					var urodz = new Date("07/28/2020");
+					var now = new Date();
+					var ile = now.getTime() - urodz.getTime();
+					var dni = Math.floor(ile / (1000 * 60 * 60 * 24));
+					document.write(+dni)
+				</script>」天</font>
+			</p>
+		</div>
+	</div>
+
+</div>
+<div class="canvaszz"> </div>
+<canvas id="canvas" style="width:100%;height:100%;"></canvas>
+
+	<div id="show-video">
+		<a class="video-close">
+			<span>
+				<svg t="1614676844098" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2082"
+				 width="30" height="30">
+					<path d="M591.506286 511.853714l417.133714-416.914285a54.601143 54.601143 0 0 0 0-76.8l-2.267429-2.267429a54.601143 54.601143 0 0 0-76.8 0L512.438857 433.481143 95.305143 15.798857a54.601143 54.601143 0 0 0-76.8 0L16.237714 18.066286a53.577143 53.577143 0 0 0 0 76.8l417.097143 416.987428L16.201143 929.097143a54.601143 54.601143 0 0 0 0 76.8l2.267428 2.267428a54.601143 54.601143 0 0 0 76.8 0l417.170286-417.060571 417.097143 417.097143a54.601143 54.601143 0 0 0 76.8 0l2.267429-2.267429a54.601143 54.601143 0 0 0 0-76.8z"
+					 p-id="2083" fill="#e6e6e6"></path>
+				</svg>
+			</span>
+		</a>
+	<video id="player" controls="controls" autoplay="autoplay" disablePictureInPicture muted></video>
+	</div>
+
+	<script type="text/javascript">
+        function playM3u8(url){
+
+            if(Hls.isSupported()) {
+                var video = document.getElementById('player');
+                video.volume = 1.0;
+                var hls = new Hls();
+                var m3u8Url = decodeURIComponent(url)
+                hls.loadSource(m3u8Url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED,function() {
+					$("#show-video").show();
+                    video.play();
+                });
+            }
+        }
+        $("#str-post").submit(function () {
+            $("html,body").animate({
+                scrollTop: $(".input-div").offset().top - 20
+            }, 200);
+            playM3u8($("#str-post").serializeArray()[0].value);
+            return false;
+        })
+	
+		$(function() {
+			//$(".view_more_video").click(function() {
+				//$("#show-video").show();
+			//})
+			var myVideo=document.getElementById("player");
+			$(".video-close").click(function() {
+				$("#show-video").hide();
+				myVideo.pause();
+			})
+		})
+
+		function Decrypt(){
+			var constr = $("#mwtxt").val();
+			var pwdstr = document.getElementById("input").value;
+			try {
+				var desstr = CryptoJS.RC4.decrypt(constr, pwdstr).toString(CryptoJS.enc.Utf8);
+				$("#textarea").val(desstr);
+				randonSelect()
+			} catch(err){
+				console.error(err)
+				window.location = 'https://www.baidu.com/s?wd='+input.value;
+			}
+		}
+
+		var form = document.getElementsByTagName("form").item(0);
+		form.onsubmit = function () {
+			return false
+		}
+
+		function randonSelect() {
+			const input = document.getElementById('textarea').value;
+			const lines = input.split('\n');
+			const randomLine = lines[Math.floor(Math.random() * lines.length)];
+			playM3u8(randomLine)
+
+		 }
+	</script>
+
+<script type="text/javascript">
+document.oncontextmenu=function(e){return false;}
+</script>
+
+		<link rel="stylesheet" type="text/css" href="guide/css/demo.css">
+		<link rel="stylesheet" type="text/css" href="guide/css/context.standalone.css">
+
+		<script src="guide/js/context.js"></script>
+		<script src="guide/js/demo.js"></script>
+
+<script>
+
+	document.addEventListener('keydown',keydown);
+	function keydown(event){
+		if (event.keyCode == 36){
+			//alert("提示")
+			myFunction();
+		}
+	}
+</script>
+
+<script>
+//宇宙特效
+"use strict";
+var canvas = document.getElementById('canvas'),
+  ctx = canvas.getContext('2d'),
+  w = canvas.width = window.innerWidth,
+  h = canvas.height = window.innerHeight,
+
+  hue = 217,
+  stars = [],
+  count = 0,
+  maxStars = 1300;//星星数量
+
+var canvas2 = document.createElement('canvas'),
+  ctx2 = canvas2.getContext('2d');
+  canvas2.width = 100;
+  canvas2.height = 100;
+var half = canvas2.width / 2,
+  gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
+gradient2.addColorStop(0.025, '#CCC');
+gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
+gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
+gradient2.addColorStop(1, 'transparent');
+
+ctx2.fillStyle = gradient2;
+ctx2.beginPath();
+ctx2.arc(half, half, half, 0, Math.PI * 2);
+ctx2.fill();
+
+// End cache
+
+function random(min, max) {
+  if (arguments.length < 2) {
+    max = min;
+    min = 0;
+  }
+
+  if (min > max) {
+    var hold = max;
+    max = min;
+    min = hold;
+  }
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function maxOrbit(x, y) {
+  var max = Math.max(x, y),
+    diameter = Math.round(Math.sqrt(max * max + max * max));
+  return diameter / 2;
+  //星星移动范围，值越大范围越小，
+}
+
+var Star = function() {
+
+  this.orbitRadius = random(maxOrbit(w, h));
+  this.radius = random(60, this.orbitRadius) / 8; 
+  //星星大小
+  this.orbitX = w / 2;
+  this.orbitY = h / 2;
+  this.timePassed = random(0, maxStars);
+  this.speed = random(this.orbitRadius) / 50000; 
+  //星星移动速度
+  this.alpha = random(2, 10) / 10;
+
+  count++;
+  stars[count] = this;
+}
+
+Star.prototype.draw = function() {
+  var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
+    y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
+    twinkle = random(10);
+
+  if (twinkle === 1 && this.alpha > 0) {
+    this.alpha -= 0.05;
+  } else if (twinkle === 2 && this.alpha < 1) {
+    this.alpha += 0.05;
+  }
+
+  ctx.globalAlpha = this.alpha;
+  ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius);
+  this.timePassed += this.speed;
+}
+
+for (var i = 0; i < maxStars; i++) {
+  new Star();
+}
+
+function animation() {
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.globalAlpha = 0.5; //尾巴
+  ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 2)';
+  ctx.fillRect(0, 0, w, h)
+
+  ctx.globalCompositeOperation = 'lighter';
+  for (var i = 1, l = stars.length; i < l; i++) {
+    stars[i].draw();
+  };
+
+  window.requestAnimationFrame(animation);
+}
+
+animation();
+</script>
+
+</body>
+</html>
